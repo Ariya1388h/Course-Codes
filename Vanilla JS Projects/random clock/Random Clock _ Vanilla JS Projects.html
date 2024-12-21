@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)https://anjana.dev/vanilla-js-projects/clock/index.html -->
+<!-- saved from url=(0058)https://anjana.dev/vanilla-js-projects/clock/finished.html -->
 <html data-theme="dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	
@@ -33,23 +33,30 @@
 	<main class="container">
 		<article>
 			<div id="clock">
-				<p id="time"></p>
+				<p id="time" style="top: 38%; left: 2%; color: hsl(263, 100%, 80%)">6:20:09 PM</p>
 
 			</div>
 		</article>
 	</main>
 
 	<script id="clock.js">
-		const clock = document.getElementById("clock");
-		const text = document.getElementById('time');
 
-		const clockTime = () => {
-			const currrentTime = new Date();
-			const timeString = currrentTime.toLocaleTimeString();
-			text.textContent = timeString;
+		const time = document.getElementById("time");
+
+		function getRandomNumber(max) {
+			return Math.floor(Math.random() * max);
 		}
 
-		setInterval(clockTime, 1000);
+		function updateTime() {
+			const currentTime = new Date();
+			const [x, y] = [getRandomNumber(80), getRandomNumber(80)];
+			const color = `hsl(${getRandomNumber(360)}, 100%, 80%)`
+			time.innerText = currentTime.toLocaleTimeString();
+			time.setAttribute("style", `top: ${x}%; left: ${y}%; color: ${color}`)
+		}
+
+		updateTime();
+		setInterval(() => updateTime(), 3000);
 
 	</script>
 

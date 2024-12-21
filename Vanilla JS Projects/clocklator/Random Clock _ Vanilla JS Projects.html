@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0061)https://anjana.dev/vanilla-js-projects/clockerator/index.html -->
+<!-- saved from url=(0064)https://anjana.dev/vanilla-js-projects/clockerator/finished.html -->
 <html data-theme="dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	
@@ -33,14 +33,73 @@
 	<main class="container">
 		<article>
 			<div id="clock">
-				<p id="time"></p>
-				<p id="day"></p>
-				<p id="date"></p>
+				<p id="time" style="top: 63%; left: 10%; color: hsl(36, 100%, 80%)">6:20:32 PM</p>
+				<p id="day" style="top: 57%; left: 10%; color: hsl(191, 100%, 80%)">Saturday</p>
+				<p id="date" style="top: 63%; left: 44%; color: hsl(264, 100%, 80%)">12/21/2024</p>
 			</div>
 		</article>
 	</main>
 
 	<script id="clock.js">
+
+		const week = [
+			"Sunday",
+			"Monday",
+			"Tuesday",
+			"Wednesday",
+			"Thursday",
+			"Friday",
+			"Saturday"
+		];
+
+		const clock = document.getElementById("clock");
+
+		function getRandomNumber(max) {
+			return Math.floor(Math.random() * max);
+		}
+
+		function getClock() {
+			const now = new Date();
+			return {
+				[Symbol.iterator]: function* () {
+					yield {
+						text: now.toLocaleTimeString(),
+						id: 'time'
+					};
+
+					yield {
+						text: now.toLocaleDateString(),
+						id: 'date'
+					};
+
+					yield {
+						text: week[now.getDay()],
+						id: 'day'
+					};
+
+				}
+			};
+		}
+
+		function updateText(text, element) {
+			const [x, y] = [getRandomNumber(75), getRandomNumber(75)];
+			const color = `hsl(${getRandomNumber(360)}, 100%, 80%)`
+			element.innerText = text;
+			element.setAttribute("style", `top: ${x}%; left: ${y}%; color: ${color}`)
+		}
+
+		function updateAll() {
+			for (let { text, id } of getClock()) {
+				const el = document.getElementById(id);
+				updateText(text, el)
+			}
+		}
+
+		updateAll();
+		setInterval(() => {
+			updateAll()
+		}, 3000)
+
 
 
 	</script>
