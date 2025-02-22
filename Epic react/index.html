@@ -25,10 +25,14 @@
 
     <script type="text/babel">
         const rootElement = document.getElementById('root');
-        const children = 'Hello World Again';
+        const children = 'Hello World Hi';
         const className = 'container';
-
-        const element = <div className={className} children={children}/>;
+        const props = { children, className };
+        const element = (
+            <div className="my-container" {...props}>
+            GoodBye World
+            </div> 
+        );
         ReactDOM.render(element, rootElement);
     </script>
 </body>              
