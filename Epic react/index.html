@@ -25,7 +25,10 @@
 
     <script type="text/babel">
         const rootElement = document.getElementById('root');
-        const element = <div className="container">Hello World</div>;
+        const children = 'Hello World Again';
+        const className = 'container';
+
+        const element = <div className={className} children={children}/>;
         ReactDOM.render(element, rootElement);
     </script>
 </body>              
